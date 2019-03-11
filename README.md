@@ -38,9 +38,9 @@ Seperate instructions are provided to get GConnect working also.
 
 Or you can simply Install the dependency libraries (Flask, sqlalchemy, requests,psycopg2 and oauth2client) by running `
 
-7. Setup application database `python /shoe_store/Shoes_Setup.py`
-8. *Insert sample data `python /shoe_store/ShoeDB_init.py`
-9. Run application using `python /shoe_store/shoestore.py`
+7. Setup application database `python Shoes_Setup.py`
+8. *Insert sample data `python ShoeDB_init.py`
+9. Run application using `python shoestore.py`
 10. Access the application locally using http://localhost:8888
 
 *Optional step(s)
