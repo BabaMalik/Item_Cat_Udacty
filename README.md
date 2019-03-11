@@ -69,6 +69,18 @@ The following are open to the public:
 Shoes Catalog JSON: `/ShoeStore/JSON`
     - Displays the whole shoes models catalog. Shoe Categories and all models.
 
+Shoe Categories JSON: `/ShoeStore/shoeCategories/JSON`
+    - Displays all Shoe categories
+All Shoe Editions: `/ShoeStore/shoes/JSON`
+	- Displays all Shoe Models
+
+Shoe Edition JSON: `/ShoeStore/<path:shoe_name>/shoes/JSON`
+    - Displays Shoe models for a specific Shoe category
+
+Shoe Category Edition JSON: `/shoeStore/<path:shoe_name>/<path:edition_name>/JSON`
+    - Displays a specific Shoe category Model.
+    
+
 ## Miscellaneous
 
 This project is inspiration from [gmawji](https://github.com/gmawji/item-catalog).
