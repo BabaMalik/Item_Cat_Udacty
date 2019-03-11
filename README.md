@@ -71,6 +71,7 @@ Shoes Catalog JSON: `/ShoeStore/JSON`
 
 Shoe Categories JSON: `/ShoeStore/shoeCategories/JSON`
     - Displays all Shoe categories
+
 All Shoe Editions: `/ShoeStore/shoes/JSON`
 	- Displays all Shoe Models
 
