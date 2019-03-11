@@ -1,0 +1,22 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+    
+
+	<div class="">
+		<div  style="width:550px;">
+			
+		
+			<div class="panel panel-secondary" style="margin: 20px; color:white;background-color:rgba(0,0,0,.8);  border-radius:15px;">
+				<div class="panel-heading" style="text-align:center; font-size:22px;">ADD SHOE COMPANY NAME:</div><hr>
+				<div class="panel-body">
+					<form class="form-inline" action="{{ url_for('addShoeCompany')}}" method="POST">
+						  <label for="email" class="mr-sm-2">Enter Shoe Company Name:</label>
+						  <input type="text" class="form-control mb-2 mr-sm-2" name="name" placeholder="Enter Shoe Company Name" required>
+						  <input type="submit" style="background-color:orangered; border-radius:15px; padding:8px 12px 8px 12px;"value="Add Company">
+					</form>
+				</div>
+			</div>	
+		</div>	
+	</div>
+{% endblock content %} 

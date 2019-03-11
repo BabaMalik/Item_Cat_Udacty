@@ -1,0 +1,50 @@
+{% include 'nav.html' %}
+<style>
+*{color:white;}
+</style>
+<div class="main" style="color:white;">
+{% block content %}
+{% with messages = get_flashed_messages() %}
+	{% if messages %}
+	        <div class="alert alert-success alert-dismissable animated fadeIn" style="color:white;">
+	            {% for message in messages %}
+	            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+	            <p class="h4"><strong>{{ message }}</strong></p>
+	            {% endfor %}
+	        </div>
+	{% endif %}	    
+{% endwith %}
+{% if 'username' in session %}
+<button type="button" class="btn btn-success" style="margin: 5px 0px 5px 25px;color:white;"><a href="{{url_for('addShoeDetails',scnname=scn.name)}}" style="text-decoration: none;"><strong>Add New Shoe</strong></a></button>
+
+{% endif %}
+<div class="row" style="margin: 10px; color:white;">
+{% for sct in sn %}
+
+	<div class="col-sm-4 text-center">
+		<div  style="background-color:rgba(0,0,0,.8);border-radius:30px;">
+			<div class="panel-heading" style="color:white;border-radius:30px;">
+				<h4>{{ sct.name }}</h4><hr>
+			</div>
+			<div class="panel-body text-center">
+				<table>
+					<tr><th>SOLE</th><td>:</td><td><h5>{{ sct.sole }}</h5></td></tr>
+					<tr><th>CLOSURE</th><td>:</td><td><h5>{{ sct.closure }}</h5></td></tr>
+					<tr><th>MATERIAL</th><td>:</td><td><h5>{{ sct.material }}</h5></td></tr>
+					<tr><th>LIFE STYLE</th><td>:</td><td><h5>{{ sct.lifestyle }}</h5></td></tr>
+					<tr><th>PRICE</th><td>:</td><td><h5>{{ sct.price }}</h5></td></tr>
+				</table>
+			
+			{% if 'username' in session %}
+			<div class="panel-footer" style="background-color:rgba(0,0,0,.0);">
+					<button type="button" class="btn btn-info"style="background-color:blue;"><a href="{{ url_for('editShoe',scnid=scn.id,scmname=sct.name) }}"style="text-decoration: none;color:white;">EDIT</a></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-danger" style="background-color:red;color white;"><a href="{{ url_for('deleteShoe',scnid=scn.id,scmname=sct.name)}}"style="text-decoration: none;color:white;">DELETE</a></button>
+			</div>
+			{% endif %}	
+			
+		</div>
+	</div></diV>
+{% endfor %}
+</div>
+{% endblock content %}
+</div>

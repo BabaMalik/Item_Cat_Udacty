@@ -1,0 +1,21 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+	<div class="">
+			<div class="text-center">
+				<div class="panel " style="width: 500px">
+					<form action="{{url_for('deleteShoe',scnid=scnid,scmname=shoedetails.name)}}" style="background-color:rgba(0,0,0,.8); border-radius:15px; margin-top:60px; margin-left:100px; color:white;" method="POST">
+						<div class="panel-body">
+							<h4 style="color:white;">Are you sure you want to delete {{shoedetails.name}}</h4>
+						</div>
+						<div style="background-color:rgba(0,0,0,.0); " class="panel-footer text-center">
+							<input type="submit" class="btn btn-danger" value="Delete" style="margin-right: 10px;">
+						    <button type="button" class="btn btn-info"><a style="color:white;" href="{{url_for('showShoes',scnid=scnid)}}">CANCEL</a></button>
+						</div>
+						
+					</form>
+				</div>
+			</div>
+	</div>
+{% endblock content %}	
+</div>

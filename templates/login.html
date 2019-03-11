@@ -1,0 +1,71 @@
+{% include 'nav.html' %}
+ <head></head>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+<script>
+  function start() {
+    gapi.load('auth2', function() {
+      auth2 = gapi.auth2.init({
+        client_id: "479292317044-miropafm2uo7e1smiaioda0d998ca94j.apps.googleusercontent.com"
+      });
+    });
+  }
+</script>
+
+
+<body> 
+<div style="text-align:center; margin-top:30px;">
+
+<button id="signinButton" class="btn btn-danger">Google Signin</button>
+<div id="result">
+  <div class="container">
+  <div class="row"> 
+    {% for sk in scn %}
+    
+      <div class="col-sm-3" style="border:1px solid blue;
+            border-radius: 20px;padding: 30px; width: 350px; margin: 20px;">
+          <a href="{{ url_for('showShoes',scnid=sk.id)}}" style="text-decoration: none;"><h4 class="text-primary">{{sk.name}}</h4></a>
+          
+      </div>
+      
+    {% endfor %}
+  </div>  
+</div>
+</div>
+</div>
+</div>
+ </body> 
+
+
+<script>
+  $('#signinButton').click(function() {
+    function signInCallback(authResult){
+      if (authResult['code']){
+        $('#signinButton').attr('style', 'display: none');
+        $.ajax({
+          type: 'POST',
+          url: '/gconnect?state={{STATE}}',
+          headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+          },
+          contentType: 'application/octet-stream; charset=utf-8',
+          success:function(result){
+            $('#result').html('Login Successful!</br>'+ result + '</br>Redirecting...')
+                 setTimeout(function() {
+                  window.location.href = "/ShoeStore";
+                 }, 2000);
+          },
+          processData:false,
+          data:authResult['code']
+        });
+      } else{
+        // handle error
+        console.log('There was an error: ' + authResult['error']);
+        $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+      }
+    }
+    auth2.grantOfflineAccess().then(signInCallback);
+  });
+</script>

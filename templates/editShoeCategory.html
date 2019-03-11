@@ -1,0 +1,15 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+    
+<div style="background-color:rgba(0,0,0,.8); border-radius:15px; color:white; width:550px; margin:55px;">
+  <h2 style="text-align:center; padding-top:20px;">EDIT SHOE CATEGORY</h2> <hr>
+  <form class="form-inline" style="text-align:center;  padding-bottom:20px;" action="{{ url_for('editShoeCategory',scnid=sk.id)}}" method="post">
+    <div class="form-group" >
+      <label for="name">SHOE NAME:</label>
+      <input type="text" class="form-control" id="name" value="{{sk.name}}" name="name">
+    </div>
+    <button type="submit" style="background-color:orangered; border-radius:10px; padding 15px;">SUBMIT</button>
+  </form>
+</div>
+{% endblock content %}

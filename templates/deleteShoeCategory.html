@@ -1,0 +1,22 @@
+{% include 'nav.html' %}
+<div class="main">
+{% block content %}
+    
+	<div class="">
+		<div class="d-flex justify-content-center" >
+			<div class="card" style="width: 750px;">
+		<form action="{{url_for('deleteShoeCategory',scnid=sk.id)}}" style="background-color:rgba(0,0,0,.8); border-radius:15px; color:white; margin:50px;" method="POST">
+			<div class="card-body">
+				<h3 class="card-text" style="text-align:center;">Are you sure you want to delete {{sk.name}}</h3>
+			</div><hr>
+			<div class="card-footer d-flex " style="text-align:center;">
+				<input type="submit"  value="Delete" style="margin-right: 10px; background-color:orangered; border-radius:8px; padding:5px;">
+			    <button type="button" style="margin-right: 10px; background-color:skyblue; border-radius:8px; padding:5px;" ><a style="text-decoration:none; color:white;" href="#">Cancel</a></button>
+			</div>
+			
+		</form>
+	</div>
+		</div>
+		
+	</div>
+	{% endblock content %}

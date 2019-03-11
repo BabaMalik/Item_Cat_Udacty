@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title> SHOE STORE</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+  <link href='https://fonts.googleapis.com/css?family=Faster One' rel='stylesheet'>
+  <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+  <style>
+    *{
+      font-family: cursive;
+	
+	  text-decoration:none;
+    }
+
+    .sidenav {
+      height: 603px;
+      width: 300px;
+      position: absolute;
+      z-index: 1;
+      top: 171px;
+      left: 0;
+      background-color:rgba(0,0,0,.8);
+      overflow-x: hidden;
+      padding-top: 20px;
+	  color:white;
+	  
+    }
+
+    .sidenav a {
+      padding: 6px 6px 6px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: black;
+      display: block;
+    }
+
+    .sidenav a:hover {
+      closure: #f1f1f1;
+	  transition:0.3s;
+	  font-family:cursive;
+	  font-size:27px;
+    }
+
+    .main {
+      margin-left: 300px;
+
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+	@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+  </style>
+  {% block head %}{% endblock head %}
+</head>
+<body>
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <script>
+            var messages = {{ messages | safe }};
+            for (var i=0; i<messages.length; i++) {
+              alert(messages[i]);
+            }
+          </script>
+        {% endif %}
+{% endwith %}
+<nav  style="  background-color:orangered;height:160px;">
+<h2 style="color:black; padding:5px; text-align:center; font-family: 'Faster One';font-size: 50px;">SHOE STORE</h2>
+<p style="text-align:center;color:black;"><b>STEP OUT IN STYLE AND COMFORT</b></P>
+  <div class="container-fluid" style="background-color:rgba(0,0,0,.8);">
+    <div style="color:white;">
+      <a class="navbar-brand" style="-webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;" href="{{ url_for('home') }}">HOME</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      {% if 'username' in session %}
+            <li><button class="btn btn-danger" style="margin-top: 5px; "><a href="{{ url_for('addShoeCompany')}}" style="text-decoration:none; color:black;-webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;">ADD SHOE CATEGORY</a></button>&nbsp&nbsp&nbsp&nbsp</li>
+            <li><button class="btn btn-danger" style="margin-top: 5px; padding:5px 10px 5px 10px;color:black; border-radius:5px; -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;">{{ session.username }}</button></li>
+			
+            <li><a style="margin-top: 5px;color:black; -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;color:white; background-color:black;" href="{{ url_for('logout')}}"><span class="glyphicon glyphicon-log-in"></span> LOGOUT</a></li>
+      {% else %}
+            <li><a style="margin-top: 5px;color:black; -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate; color:white; background-color:black;" href="{{ url_for('showLogin')}}"><span class="glyphicon glyphicon-log-in"></span> LOGIN</a></li>
+			
+      {% endif %}
+      
+    </ul>
+  </div>
+</nav>
+  
+<div class="sidenav" style=" color:white;">
+  <table>
+      {% for sk in shoe_catlg %}
+      <tr>
+          <td><a style=" color:white;" href="{{ url_for('showShoes',scnid=sk.id)}}">{{sk.name}}</a></td>
+          {% if 'username' in session %}
+            <td><a style=" color:white;" href = "{{ url_for('editShoeCategory',scnid=sk.id)}}">
+            <span class="glyphicon glyphicon-pencil pull-right " data-toggle="tooltip" title="Edit Category" data-placement="bottom"> </span> </a></td>
+            <td><a style=" color:white;" href = "{{ url_for('deleteShoeCategory',scnid=sk.id)}}">
+            <span class="glyphicon glyphicon-trash pull-right" data-toggle="tooltip" title="Delete Category" data-placement="top"> </span> </a></td>  
+          {% endif %}   
+        </tr>              
+      {% endfor %}
+  </table>
+</div>
+<div class="container">
+
+      <div class="main">
+        
+            {% block content %}
+              
+            {% endblock content %}
+          
+        </div>
+  </div>
+  
+</body>
+</html>
