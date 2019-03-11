@@ -55,7 +55,7 @@ To get the Google login working there are a few additional steps:
 5. Select Web application
 6. Enter name 'Shoe-Store'
 7. Authorized JavaScript origins = 'http://localhost:8888'
-8. Authorized redirect URIs = 'http://localhost:8888/login'
+8. Authorized redirect URIs = 'http://localhost:8888/login' && 'http://localhost:8000/gconnect'
 9. Select Create
 10. Copy the Client ID and paste it into the `data-clientid` in login.html
 11. On the Dev Console Select Download JSON
