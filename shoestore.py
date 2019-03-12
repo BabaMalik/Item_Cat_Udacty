@@ -212,6 +212,8 @@ def showShoes(scnid):
 
 @app.route('/ShoeStore/addShoeCompany', methods=['POST', 'GET'])
 def addShoeCompany():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         company = ShoeCompanyName(name=request.form['name'],
                                   user_id=login_session['user_id'])
@@ -227,6 +229,8 @@ def addShoeCompany():
 
 @app.route('/ShoeStore/<int:scnid>/edit', methods=['POST', 'GET'])
 def editShoeCategory(scnid):
+    if 'username' not in login_session:
+        return redirect('/login')
     editedShoe = session.query(ShoeCompanyName).filter_by(id=scnid).one()
     creator = getUserInfo(editedShoe.user_id)
     user = getUserInfo(login_session['user_id'])
@@ -275,6 +279,8 @@ def deleteShoeCategory(scnid):
 @app.route('/ShoeStore/addCompany/addShoeDetails/<string:scnname>/add',
            methods=['GET', 'POST'])
 def addShoeDetails(scnname):
+    if 'username' not in login_session:
+        return redirect('/login')
     scn = session.query(ShoeCompanyName).filter_by(name=scnname).one()
     # See if the logged in user is not the owner of shoe
     creator = getUserInfo(scn.user_id)
